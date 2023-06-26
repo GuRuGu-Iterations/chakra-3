@@ -1,0 +1,8 @@
+node_modules
+.husky
+coverage
+.prettierignore
+.eslintignore
+.gitignore
+public
+*.svg
