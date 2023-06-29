@@ -1,4 +1,4 @@
-import { createBrowserRouter, redirect } from 'react-router-dom';
+import { createBrowserRouter } from 'react-router-dom';
 import { Root, RootErrorBoundary, Dashboard } from './pages';
 
 const router = createBrowserRouter([
@@ -6,7 +6,7 @@ const router = createBrowserRouter([
     path: '/',
     loader: async () => {
       console.log('root loader');
-      throw redirect('/login');
+      // throw redirect('/login');
       return null;
     },
     element: <Root />,

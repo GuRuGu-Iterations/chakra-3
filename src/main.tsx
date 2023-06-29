@@ -7,7 +7,7 @@ import { router } from './router';
 
 const colors = {
   brand: {
-    900: '#1a365d',
+    main: '#23BF1F',
     800: '#153e75',
     700: '#2a69ac',
   },
