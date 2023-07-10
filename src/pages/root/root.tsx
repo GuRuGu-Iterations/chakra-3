@@ -1,15 +1,15 @@
-import { HStack } from '@chakra-ui/react';
+import { HStack, Box } from '@chakra-ui/react';
 import { Outlet } from 'react-router-dom';
 
 import { Sidebar } from '../../components';
 
 function Root() {
   return (
-    <HStack spacing='2rem'>
+    <HStack spacing='0'>
       <Sidebar />
-      <main>
+      <Box as='main' w='100%' h='100vh' overflow='auto' p='3rem'>
         <Outlet />
-      </main>
+      </Box>
     </HStack>
   );
 }

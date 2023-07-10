@@ -1,5 +1,9 @@
 import { VStack } from '@chakra-ui/react';
+
 import { SidebarLogo } from './sidebar-logo';
+import { SidebarItem } from './sidebar-item';
+
+const menuItems = ['Dashboard', 'Tickets', 'Propositions'];
 
 function Sidebar() {
   return (
@@ -12,11 +16,9 @@ function Sidebar() {
       bg='gray.200'
     >
       <SidebarLogo />
-      <div>Dashboard</div>
-      <div>Accounts</div>
-      <div>Sales</div>
-      <div>Expenses</div>
-      <div>Reports</div>
+      {menuItems.map((item) => (
+        <SidebarItem key={item}>{item}</SidebarItem>
+      ))}
     </VStack>
   );
 }
