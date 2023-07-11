@@ -3,7 +3,10 @@ import {
   Root,
   RootErrorBoundary,
   Dashboard,
-  LoginErrorBoundary,
+  AuthLayout,
+  AuthErrorBoundary,
+  Login,
+  Registration,
 } from './pages';
 
 const router = createBrowserRouter([
@@ -11,7 +14,7 @@ const router = createBrowserRouter([
     path: '/',
     loader: async () => {
       console.log('root loader');
-      // throw redirect('/login');
+      throw redirect('/auth');
       return null;
     },
     element: <Root />,
@@ -19,11 +22,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: 'dashboard',
-        element: <Dashboard />,
         loader: async () => {
           console.log('dashboard loader');
           return null;
         },
+        element: <Dashboard />,
       },
       {
         path: 'tickets',
@@ -40,12 +43,23 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: 'login',
+    path: 'auth',
     loader: async () => {
-      throw redirect('/propositions');
+      // throw redirect('/propositions');
+      return 'success';
     },
-    errorElement: <LoginErrorBoundary />,
-    element: <div>Login</div>,
+    element: <AuthLayout />,
+    errorElement: <AuthErrorBoundary />,
+    children: [
+      {
+        path: 'login',
+        element: <Login />,
+      },
+      {
+        path: 'registration',
+        element: <Registration />,
+      },
+    ],
   },
 ]);
 
