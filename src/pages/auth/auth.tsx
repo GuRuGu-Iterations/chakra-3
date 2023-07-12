@@ -6,10 +6,12 @@ function AuthLayout() {
     <Stack
       direction={['column', 'column', 'row']}
       align='center'
+      alignItems='center'
       justify='center'
       spacing='2rem'
       bgColor='bg.login'
       h='100vh'
+      p='1rem'
       color='text.secondary'
     >
       <Box>
@@ -26,7 +28,7 @@ function AuthLayout() {
           affordable ICs.
         </Text>
       </Box>
-      <Box>
+      <Box w='100%' maxW='600px'>
         <HStack spacing='1rem' paddingBlockEnd={['1rem', '2rem', '3rem']}>
           <NavLink to='login'>
             <Button variant='primary'>Login</Button>
