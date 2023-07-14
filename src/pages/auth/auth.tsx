@@ -1,7 +1,11 @@
-import { Outlet, NavLink } from 'react-router-dom';
+import { Outlet, NavLink, useLocation } from 'react-router-dom';
 import { Stack, Box, Heading, Text, HStack, Button } from '@chakra-ui/react';
 
 function AuthLayout() {
+  const { pathname } = useLocation();
+  const isLogin = pathname === '/login';
+  const isRegistration = pathname === '/registration';
+
   return (
     <Stack
       direction={['column', 'column', 'row']}
@@ -31,10 +35,17 @@ function AuthLayout() {
       <Box w='100%' maxW='600px'>
         <HStack spacing='1rem' paddingBlockEnd={['1rem', '2rem', '3rem']}>
           <NavLink to='login'>
-            <Button variant='primary'>Login</Button>
+            <Button variant='primary' bg={isLogin ? 'brand.main' : 'inherit'}>
+              Login
+            </Button>
           </NavLink>
           <NavLink to='registration'>
-            <Button variant='primary'>Register</Button>
+            <Button
+              variant='primary'
+              bg={isRegistration ? 'brand.main' : 'inherit'}
+            >
+              Register
+            </Button>
           </NavLink>
         </HStack>
         <Outlet />
