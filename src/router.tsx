@@ -8,20 +8,24 @@ import {
   Login,
   Registration,
 } from './pages';
+import { getUser } from './mocks/my-handlers';
 
 const router = createBrowserRouter([
   {
     path: '/',
     loader: async () => {
       console.log('root loader');
-      throw redirect('/auth');
-      return null;
+      const user = getUser();
+      if (!user) {
+        throw redirect('/login');
+      }
+      return user;
     },
     element: <Root />,
     errorElement: <RootErrorBoundary />,
     children: [
       {
-        path: 'dashboard',
+        index: true,
         loader: async () => {
           console.log('dashboard loader');
           return null;
@@ -30,10 +34,18 @@ const router = createBrowserRouter([
       },
       {
         path: 'tickets',
+        loader: async () => {
+          console.log('tickets loader');
+          return null;
+        },
         element: <div>Tickets</div>,
       },
       {
         path: 'propositions',
+        loader: async () => {
+          console.log('propositions loader');
+          return null;
+        },
         element: <div>Propositions</div>,
       },
       {
@@ -43,11 +55,6 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: 'auth',
-    loader: async () => {
-      // throw redirect('/propositions');
-      return 'success';
-    },
     element: <AuthLayout />,
     errorElement: <AuthErrorBoundary />,
     children: [

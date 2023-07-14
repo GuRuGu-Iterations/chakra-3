@@ -14,10 +14,17 @@ const theme = extendTheme({
     },
   },
   components: {
-    Box: {
+    Link: {
       variants: {
-        menuItem: {
-          borderRadius: '0.5rem',
+        navItem: {
+          borderRadius: '0.3rem',
+          w: '100%',
+          py: '.2rem',
+          bg: 'white',
+          _hover: {
+            textDecoration: 'none',
+            bg: 'gray.100',
+          },
         },
       },
     },

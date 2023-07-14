@@ -1,9 +1,7 @@
-import { VStack } from '@chakra-ui/react';
+import { NavLink } from 'react-router-dom';
+import { VStack, Link } from '@chakra-ui/react';
 
 import { SidebarLogo } from './sidebar-logo';
-import { SidebarItem } from './sidebar-item';
-
-const menuItems = ['Dashboard', 'Tickets', 'Propositions'];
 
 function Sidebar() {
   return (
@@ -16,9 +14,15 @@ function Sidebar() {
       bg='gray.200'
     >
       <SidebarLogo />
-      {menuItems.map((item) => (
-        <SidebarItem key={item}>{item}</SidebarItem>
-      ))}
+      <Link as={NavLink} to='/' variant='navItem'>
+        Dashboard
+      </Link>
+      <Link as={NavLink} to='/tickets' variant='navItem'>
+        Tickets
+      </Link>
+      <Link as={NavLink} to='/propositions' variant='navItem'>
+        Propositions
+      </Link>
     </VStack>
   );
 }
