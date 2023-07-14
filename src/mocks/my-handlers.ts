@@ -1,25 +1,20 @@
-interface IUser {
-  id: number;
-  email: string;
-  password: string;
-}
+import { IUser } from '../types';
 
 const users: IUser[] = [
   {
-    id: 1,
     email: 'petro@mail.com',
     password: '123',
   },
 ];
 
 const getUser = () => {
-  const existingUser = localStorage.getItem('my-fake-user');
+  const existingUser = localStorage.getItem('chakra-3-user');
 
-  if (existingUser) {
-    return JSON.parse(existingUser);
+  if (!existingUser) {
+    return null;
   }
 
-  return null;
+  return JSON.parse(existingUser);
 };
 
 const registerUser = (user: IUser) => {

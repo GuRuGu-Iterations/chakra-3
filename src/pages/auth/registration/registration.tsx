@@ -7,6 +7,7 @@ import {
   Button,
 } from '@chakra-ui/react';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { useBeforeUnload, Form, useFetcher } from 'react-router-dom';
 
 interface Inputs {
   email: string;
@@ -21,11 +22,25 @@ function Registration() {
     watch,
     formState: { errors },
   } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
-  const watchPassword = watch('password');
+  const fetcher = useFetcher();
+
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    const formData = new FormData();
+    formData.append('email', data.email);
+    formData.append('password', data.password);
+
+    fetcher.submit(formData, {
+      action: '/register',
+      method: 'POST',
+    });
+  };
+
+  useBeforeUnload(() => {
+    console.log('Running useBeforeUnload');
+  });
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <Form onSubmit={handleSubmit(onSubmit)}>
       <FormControl isInvalid={!!errors.email}>
         <FormLabel>Email</FormLabel>
         <Input
@@ -39,7 +54,7 @@ function Registration() {
         )}
       </FormControl>
 
-      <FormControl isInvalid={!!errors.email}>
+      <FormControl isInvalid={!!errors.password}>
         <FormLabel>Password</FormLabel>
         <Input
           type='password'
@@ -52,14 +67,14 @@ function Registration() {
         )}
       </FormControl>
 
-      <FormControl isInvalid={!!errors.email}>
+      <FormControl isInvalid={!!errors.confirmPassword}>
         <FormLabel>Confirm password</FormLabel>
         <Input
           type='password'
           {...register('confirmPassword', {
-            required: 'Please enter your password',
+            required: 'Confirm your password',
             validate: (value) =>
-              value === watchPassword || 'Passwords do not match',
+              value === watch('password') || 'Passwords do not match',
           })}
         />
         {!errors.confirmPassword ? (
@@ -72,7 +87,7 @@ function Registration() {
       <Button colorScheme='whiteAlpha' type='submit' marginBlockStart='1rem'>
         Register
       </Button>
-    </form>
+    </Form>
   );
 }
 

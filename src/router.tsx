@@ -7,6 +7,7 @@ import {
   AuthErrorBoundary,
   Login,
   Registration,
+  registrationLoader,
 } from './pages';
 import { getUser } from './mocks/my-handlers';
 
@@ -16,9 +17,11 @@ const router = createBrowserRouter([
     loader: async () => {
       console.log('root loader');
       const user = getUser();
+
       if (!user) {
         throw redirect('/login');
       }
+
       return user;
     },
     element: <Root />,
@@ -63,7 +66,8 @@ const router = createBrowserRouter([
         element: <Login />,
       },
       {
-        path: 'registration',
+        path: 'register',
+        action: registrationLoader,
         element: <Registration />,
       },
     ],

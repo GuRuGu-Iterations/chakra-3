@@ -4,7 +4,7 @@ import { Stack, Box, Heading, Text, HStack, Button } from '@chakra-ui/react';
 function AuthLayout() {
   const { pathname } = useLocation();
   const isLogin = pathname === '/login';
-  const isRegistration = pathname === '/registration';
+  const isRegister = pathname === '/register';
 
   return (
     <Stack
@@ -39,10 +39,10 @@ function AuthLayout() {
               Login
             </Button>
           </NavLink>
-          <NavLink to='registration'>
+          <NavLink to='register'>
             <Button
               variant='primary'
-              bg={isRegistration ? 'brand.main' : 'inherit'}
+              bg={isRegister ? 'brand.main' : 'inherit'}
             >
               Register
             </Button>
